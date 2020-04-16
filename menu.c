@@ -9,7 +9,7 @@ void display_list(char **list, size_t list_size);
 
 void show_menu() {
     const size_t arr_length = 5;
-    char *options[arr_length] = {
+    char *options[] = {
             "Show users list",
             "Add new user",
             "Edit user data",
