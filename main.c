@@ -1,25 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
 #include "menu.h"
+#include "user.h"
 
 // Database constants
 
 const size_t DB_SIZE = 64;
-
-// Define `User` structure
-
-struct User {
-    char login[32];
-    char email[100];
-    int age;
-};
-
-// Declare User related functions
-
-void print_user(struct User *user, int position);
-struct User create_user(const char *login, const char *email, int age);
 
 // Declare database related functions
 void show_users_list(struct User *db, int users_count);
@@ -125,19 +111,4 @@ void remove_user(struct User *db, int position, int *count) {
         return;
     }
     // TODO: Remove user at the given position
-}
-
-// User related functions implementation
-
-struct User create_user(const char *login, const char *email, int age) {
-    struct User new_user;
-    strcpy(new_user.login, login);
-    strcpy(new_user.email, email);
-    new_user.age = age;
-
-    return new_user;
-}
-
-void print_user(struct User *user, int position) {
-    printf("%d. User { login = %s, email = %s, age = %d }\n", position, user->login, user->email, user->age);
 }
