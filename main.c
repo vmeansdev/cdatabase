@@ -38,10 +38,14 @@ int start_application(User *database, int *users_count) {
                 remove_user(database, user_position, users_count);
                 break;
             }
-            default:
-                printf("No such option. Good bye!\n");
+            case EXIT: {
                 free(database);
+                printf("Good bye!\n");
                 return 0;
+            }
+            default:
+                printf("Sorry?\n");
+                break;
         }
     }
 }

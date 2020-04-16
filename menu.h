@@ -9,7 +9,8 @@ typedef enum MenuOptions {
     SHOW_USERS = 1,
     ADD_USER,
     EDIT_USER,
-    REMOVE_USER
+    REMOVE_USER,
+    EXIT
 } MenuOptions;
 
 void show_menu();
