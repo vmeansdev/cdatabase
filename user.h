@@ -5,13 +5,14 @@
 #ifndef DATABASE_USER_H
 #define DATABASE_USER_H
 
-struct User {
+typedef struct {
     char login[32];
     char email[100];
     int age;
-};
+} User;
 
-void print_user(struct User *user, int position);
-struct User create_user(const char *login, const char *email, int age);
+void print_user(User *user, int position);
+
+User create_user(const char *login, const char *email, int age);
 
 #endif //DATABASE_USER_H

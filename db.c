@@ -3,16 +3,20 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "db.h"
-#include "user.h"
 
-void show_users_list(struct User *db, int users_count) {
+User* init_database(size_t size) {
+    return (User *)malloc(DB_SIZE * sizeof(User));
+}
+
+void show_users_list(User *db, int users_count) {
     if (users_count == 0) {
         printf("There are no any users.\n");
         return;
     }
     for (int i = 0; i < users_count; i++) {
-        struct User *user = &db[i];
+        User *user = &db[i];
         print_user(user, i + 1);
     }
 }
@@ -26,7 +30,7 @@ void obtain_user_data(char *login, char *email, int *age) {
     scanf("%d", age);
 }
 
-void add_user(struct User *db, struct User user, int *count) {
+void add_user(User *db, User user, int *count) {
     if (*count >= DB_SIZE) {
         printf("Sorry. Database is full.");
         return;
@@ -35,12 +39,12 @@ void add_user(struct User *db, struct User user, int *count) {
     *count += 1;
 }
 
-void edit_user_data(struct User *db, int position) {
+void edit_user_data(User *db, int position) {
     if (position >= DB_SIZE) {
         printf("Incorrect position");
         return;
     }
-    struct User *user = &db[position];
+    User *user = &db[position];
     if (user == NULL) {
         printf("There is no user at the given position %d", position);
         return;
@@ -48,12 +52,12 @@ void edit_user_data(struct User *db, int position) {
     // TODO: Edit user's data here
 }
 
-void remove_user(struct User *db, int position, int *count) {
+void remove_user(User *db, int position, int *count) {
     if (position >= DB_SIZE) {
         printf("Incorrect position");
         return;
     }
-    struct User *user = &db[position];
+    User *user = &db[position];
     if (user == NULL) {
         printf("There is no user at the given position %d", position);
         return;
