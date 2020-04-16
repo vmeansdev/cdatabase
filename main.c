@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "menu.h"
+
 // Database constants
 
 const size_t DB_SIZE = 64;
@@ -19,31 +21,12 @@ struct User {
 void print_user(struct User *user, int position);
 struct User create_user(const char *login, const char *email, int age);
 
-// Define `MenuOptions` enum
-
-enum MenuOptions {
-    SHOW_USERS = 1,
-    ADD_USER,
-    EDIT_USER,
-    REMOVE_USER,
-    SHOW_MENU
-};
-
-// Declare UI related functions
-
-void show_menu();
-int obtain_option();
-
 // Declare database related functions
 void show_users_list(struct User *db, int users_count);
 void obtain_user_data(char *login, char *email, int *age);
 void add_user(struct User *db, struct User user, int *count);
 void edit_user_data(struct User *db, int position);
 void remove_user(struct User *db, int position, int *count);
-
-// Declare helper functions
-
-void display_list(char **list, size_t list_size);
 
 // Entry point
 
@@ -87,27 +70,6 @@ int main() {
     }
 }
 
-// UI related functions implementation
-
-void show_menu() {
-    const size_t arr_length = 5;
-    char *options[arr_length] = {
-            "Show users list",
-            "Add new user",
-            "Edit user data",
-            "Remove user",
-            "Show menu"
-    };
-    display_list(options, arr_length);
-}
-
-int obtain_option() {
-    int option;
-    printf("Choose menu option: ");
-    scanf("%d", &option);
-    return option;
-}
-
 // Database related functions implementation
 
 void show_users_list(struct User *db, int users_count) {
@@ -132,7 +94,7 @@ void obtain_user_data(char *login, char *email, int *age) {
 
 void add_user(struct User *db, struct User user, int *count) {
     if (*count >= (int)DB_SIZE) {
-        printf("Database is full");
+        printf("Sorry. Database is full.");
         return;
     }
     db[*count] = user;
@@ -178,15 +140,4 @@ struct User create_user(const char *login, const char *email, int age) {
 
 void print_user(struct User *user, int position) {
     printf("%d. User { login = %s, email = %s, age = %d }\n", position, user->login, user->email, user->age);
-}
-
-// Helper functions implementation
-
-void display_list(char **list, const size_t list_size) {
-    printf("\n");
-    for (int i = 0; i < list_size; i++) {
-        char *item = list[i];
-        int position = i + 1;
-        printf("%d. %s\n", position, item);
-    }
 }
