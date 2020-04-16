@@ -7,7 +7,7 @@
 #include "db.h"
 
 User* init_database(size_t size) {
-    return (User *)malloc(DB_SIZE * sizeof(User));
+    return (User *)malloc(size * sizeof(User));
 }
 
 void show_users_list(User *db, int users_count) {
