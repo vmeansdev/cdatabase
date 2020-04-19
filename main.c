@@ -7,10 +7,9 @@
 void add_new_user(User *db, int *count) {
     char *login = (char *)malloc(32 * sizeof(char));
     char *email = (char *)malloc(100 * sizeof(char));
-    int default_age = 0;
-    int *age = &default_age;
-    obtain_user_data(login, email, age);
-    User user = create_user(login, email, *age);
+    int age = 0;
+    obtain_user_data(login, email, &age);
+    User user = create_user(login, email, age);
     add_user(db, user, count);
     free(login);
     free(email);
@@ -52,7 +51,6 @@ int start_application(User *database, int *users_count) {
 
 int main() {
     User *database = init_database(DB_SIZE);
-    int default_count = 0;
-    int *users_count = &default_count;
-    return start_application(database, users_count);
+    int users_count = 0;
+    return start_application(database, &users_count);
 }
